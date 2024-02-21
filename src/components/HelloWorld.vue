@@ -10,9 +10,12 @@ onscroll = (event) => {
   const swiper = document.querySelector('.swipercontainer'),
   title = document.querySelector('.title'),
   headingtitle = document.querySelector('.title h1'),
+  secondsectionslides = document.querySelector('.secondsectionslides'),
   headingp = document.querySelector('.title p'),
   secondsection = document.querySelector('.secondsection'),
-  secondsectionwrapper = document.querySelector('.secondsectionwrapper');
+  thirdsection = document.querySelector('.thirdsection'),
+  secondswiper = document.querySelector('.secondswiper'),
+  nav = document.querySelector('nav');
   
   if (window.scrollY > 100) {
     swiper.style.transform = 'translateX(1000px)';
@@ -23,40 +26,18 @@ onscroll = (event) => {
   }
   
   setTimeout(() => {
-    if (window.scrollY > 100) {    
-      title.style.top = '50px';
-      title.style.position = 'fixed';
+    if (window.scrollY > 100) {
       headingtitle.innerHTML = 'Services I offer';
       headingp.innerHTML = 'From multi-page websites, to single page, I am trained in all!.';
       
-      secondsection.style.opacity = '1';
+      secondsectionslides.style.opacity = '1';
     } else {
-      title.style.top = '160px';
-      title.style.position = 'absolute';
       headingtitle.innerHTML = 'Hand-coded Websites';
       headingp.innerHTML = 'Why settle for an average website when you have an exceptional idea? <br> Get a hand-coded website today!';
       
-      secondsection.style.opacity = '0';
+      secondsectionslides.style.opacity = '0';
     }
   }, 500);
-  
-  // if element is in view
-  const topLeftSlide = document.getElementById('top-right-slide'),
-  topRightSlide = document.getElementById('top-left-slide'),
-  bottomRightSlide = document.getElementById('bottom-right-slide'),
-  bottomLeftSlide = document.getElementById('bottom-left-slide'),
-  thirdsection = document.querySelector('.thirdsection');
-  
-  if (window.scrollY <= 100) {
-    topLeftSlide.style.opacity = '0';
-    topLeftSlide.style.transform = 'translateX(56px)';
-    topRightSlide.style.opacity = '0';
-    topRightSlide.style.transform = 'translateX(-56px)';
-    bottomLeftSlide.style.opacity = '0';
-    bottomLeftSlide.style.transform = 'translateX(-56px)';
-    bottomRightSlide.style.opacity = '0';
-    bottomRightSlide.style.transform = 'translateX(56px)';
-  }
   
   if (secondsection.getBoundingClientRect().top + 800 < window.innerHeight) {
     title.style.transform = 'translateX(-1000px)';
@@ -69,45 +50,23 @@ onscroll = (event) => {
     headingtitle.innerHTML = 'My Portfolio';
     headingp.innerHTML = 'See some of my work!';
   }
-  
-  if (secondsectionwrapper.getBoundingClientRect().top + 300 < window.innerHeight) {
-    topLeftSlide.style.opacity = '1';
-    topLeftSlide.style.transform = 'translateX(0)';
-  }
-  if (secondsectionwrapper.getBoundingClientRect().top + 700 < window.innerHeight) {
-    topRightSlide.style.opacity = '1';
-    topRightSlide.style.transform = 'translateX(0)';
-  }
-  if (secondsectionwrapper.getBoundingClientRect().top + 1100 < window.innerHeight) {
-    bottomLeftSlide.style.opacity = '1';
-    bottomLeftSlide.style.transform = 'translateX(0)';
-  }
-  if (secondsectionwrapper.getBoundingClientRect().top + 1500 < window.innerHeight) {
-    bottomRightSlide.style.opacity = '1';
-    bottomRightSlide.style.transform = 'translateX(0)';
-  }
-  
-  if (secondsectionwrapper.getBoundingClientRect().top + 2000 < window.innerHeight) {
-    secondsection.style.position = 'unset';
-    secondsection.style.left = 'unset';
-    secondsection.style.top = 'unset';
-    secondsection.style.transform = 'unset';
-    secondsectionwrapper.style.display = 'none';
-  }
-  
-  const secondswiper = document.querySelector('.secondswiper');
-  
-  if (secondswiper.getBoundingClientRect().top + 200 < window.innerHeight) {
-    secondswiper.style.opacity = '1';
-  } else {
-    secondswiper.style.opacity = '0';
-    secondsectionwrapper.style.display = 'block';
-    secondsection.style.position = 'fixed';
-    secondsection.style.left = '50%';
-    secondsection.style.top = '50%';
-    secondsection.style.transform = 'translateX(-50%)';
-  }
 };
+
+function expandnav() {
+  const nav = document.querySelector('nav');
+  
+  if (nav.style.height === '200px') {
+    nav.style.height = '56px';
+    nav.style.top = '16px';
+    nav.style.width = '90%';
+    nav.style.borderRadius = '16px';
+  } else {
+    nav.style.height = '200px';
+    nav.style.top = '0';
+    nav.style.width = '100%';
+    nav.style.borderRadius = '0';
+  }
+}
 
 onMounted(() => {
   addEventListener("scroll", (event) => {});
@@ -115,31 +74,35 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="bg-[#111111] w-full h-full absolute outside">
+  <div class="bg-[#000000] w-full h-full absolute overflow-x-clip outside">
     <section class="h-full">
-      <nav class="text-white flex items-center justify-end mt-5 pr-6">
-        <!-- <img src="../assets/me.jpeg" class="absolute shadow-black shadow-md -left-1 top-10 w-[60px] m-4 rounded-full" alt=""> -->
-        <a class="font-bold uppercase absolute left-6 md:left-8 md:mt-0 mt-6" href="">JacksWeb</a>
+      <div class="w-full max-h-[650px] overflow-hidden absolute opacity-80 mainvideo">
+        <video autoplay loop muted src="../assets/nature2.mp4"></video>
+      </div>
+      
+      <nav class="flex items-center fixed h-14 top-4 w-[90%] max-w-3xl justify-end z-40 pr-6 py-4 rounded-2xl text-white bg-white/20 backdrop-blur-md left-1/2 duration-500 -translate-x-1/2">
+        <!-- <div class="size-[50px] absolute left-3 top-3 rounded-full border-b-2 meimage"></div> -->
+        <a class="font-bold uppercase absolute left-4" href="">JacksWeb</a>
         
-        <ul class="hidden md:flex">
-          <li class="duration-200 hover:bg-red-900 px-3 py-1 rounded-full cursor-pointer">Home</li>
-          <li class="duration-200 hover:bg-red-900 px-3 py-1 rounded-full cursor-pointer">Services</li>
-          <li class="duration-200 hover:bg-red-900 px-3 py-1 rounded-full cursor-pointer">Portfolio</li>
-          <li class="duration-200 hover:bg-red-900 px-3 py-1 rounded-full cursor-pointer">About</li>
-          <li class="duration-200 hover:bg-red-900 px-3 py-1 rounded-full cursor-pointer">Contact</li>
+        <ul class="hidden gap-4 md:flex text-sm">
+          <li class="duration-200 rounded-full cursor-pointer">Home</li>
+          <li class="duration-200 rounded-full cursor-pointer">Services</li>
+          <li class="duration-200 rounded-full cursor-pointer">Portfolio</li>
+          <li class="duration-200 rounded-full cursor-pointer">About</li>
+          <li class="duration-200 rounded-full cursor-pointer">Contact</li>
         </ul>
         
         <input id="toggle" type="checkbox" class="hidden">
         
-        <label @click="expandnav" for="toggle" class="hamburger absolute top-4 right-6 cursor-pointer md:hidden">
+        <label @click="expandnav" for="toggle" class="hamburger cursor-pointer md:hidden">
           <div class="top-bun"></div>
           <div class="meat"></div>
           <div class="bottom-bun"></div>
         </label>
       </nav>
       
-      <header class="inline-flex font-[roboto] items-center text-white">
-        <section class="w-[325px] absolute md:top-40 top-28 left-6 md:left-14 duration-500 z-50 backdrop-blur-lg p-4 rounded-md title">
+      <header class="inline-flex mt-40 font-[roboto] items-center text-white">
+        <section class="md:w-[40%] w-[75%] md:max-w-lg fixed md:top-40 top-28 left-2 md:left-14 duration-500 z-30 p-6 rounded-xl title">
           <h1 class="md:text-3xl text-xl font-bold uppercase">Hand-coded Websites</h1>
           
           <p class="mt-2 opacity-70 duration-200 md:text-base text-sm">Why settle for an average website when you have an exceptional idea? <br>
@@ -149,9 +112,9 @@ onMounted(() => {
         </section>
       </header>
       
-      <section class="h-[40%] mt-[370px] md:p-10 p-2 text-white md:max-w-3xl mx-auto duration-1000 swipercontainer">
-        <swiper class="size-full" 
-        :slides-per-view="1.5" 
+      <section class="h-[35%] mt-[440px] md:p-6 p-2 text-white md:max-w-3xl mx-auto duration-1000 rounded-2xl swipercontainer">
+        <swiper class="size-full rounded-lg"
+        :slides-per-view="1.5"
         :space-between="30"
         :pagination="{ clickable: true }" 
         :navigation="{ nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }"
@@ -178,31 +141,46 @@ onMounted(() => {
     </section>
   </section>
   
-  <section class="h-[200%] flex items-end secondsectionwrapper">
-    <section class="w-full h-full duration-500 opacity-0 md:p-10 p-3 fixed left-1/2 top-1/2 -translate-x-1/2 secondsection">
-      <div class="w-full text-white md:gap-10 gap-2 grid place-items-center grid-cols-1 md:grid-cols-2 max-w-4xl">
-        <div class="bg-[#ffffff30] backdrop-blur-md md:p-8 p-4 rounded-lg duration-700 max-w-md -translate-x-56 opacity-0" id="top-left-slide">
-          <h2 class="font-bold mb-4 uppercase">title one here</h2>
-          <p class="md:text-base text-sm">description goes here. place holder at the moment just so i can see what thius would look like,will cange in  a bit</p>
+  <section class="flex mt-0 items-end secondsectionwrapper">
+    <section class="w-full h-full flex flex-col items-center justify-center duration-500 md:p-10 p-3 secondsection">
+      <div class="w-full duration-700 pt-20 text-white md:gap-10 gap-2 grid place-items-center grid-cols-1 md:grid-cols-2 max-w-4xl opacity-100 secondsectionslides">
+        <div class="bg-[#ffffff30] backdrop-blur-md md:p-8 p-4 rounded-lg duration-700 max-w-md">
+          <div class="inline-flex -ml-2 gap-2 items-center justify-center">
+            <img class="w-10" src="../assets/singlepage.png" alt="">
+            <h2 class="font-bold uppercase">Single page website</h2>
+          </div>
+          <p class="md:text-base text-sm mt-2">A single-page website consists of only one page with all your content being on it. Depending on what you want, this can be cheaper than a multi-page website.</p>
         </div>
-        <div class="bg-[#ffffff30] backdrop-blur-md md:p-8 p-4 rounded-lg duration-700 max-w-md translate-x-56 opacity-0" id="top-right-slide">
-          <h2 class="font-bold mb-4 uppercase">title one here</h2>
-          <p class="md:text-base text-sm">description goes here. place holder at the moment just so i can see what thius would look like,will cange in  a bit</p>
+        
+        <div class="bg-[#ffffff30] backdrop-blur-md md:p-8 p-4 rounded-lg duration-700 max-w-md">
+          <div class="inline-flex -ml-2 gap-2 items-center justify-center">
+            <img class="w-10" src="../assets/multipage.png" alt="">
+            <h2 class="font-bold uppercase">Multi-page website</h2>
+          </div>
+          <p class="md:text-base text-sm mt-2">A multi-page website consists of multiple pages to your site. Instead of your content remaining on one, it can be split up. This could be more expensive.</p>
         </div>
-        <div class="bg-[#ffffff30] backdrop-blur-md md:p-8 p-4 rounded-lg duration-700 max-w-md -translate-x-56 opacity-0" id="bottom-left-slide">
-          <h2 class="font-bold mb-4 uppercase">title one here</h2>
-          <p class="md:text-base text-sm">description goes here. place holder at the moment just so i can see what thius would look like,will cange in  a bit</p>
+
+        <div class="bg-[#ffffff30] backdrop-blur-md p-4 rounded-lg duration-700 max-w-md text-white">
+          <div class="inline-flex -ml-2 gap-2 items-center justify-center">
+            <img class="w-10" src="../assets/singlepage.png" alt="">
+            <h2 class="font-bold uppercase">Admin login</h2>
+          </div>
+          <p class="md:text-base text-sm mt-2">A single-page website consists of only one page with all your content being on it. Depending on what you want, this can be cheaper than a multi-page website.</p>
         </div>
-        <div class="bg-[#ffffff30] backdrop-blur-md md:p-8 p-4 rounded-lg duration-700 max-w-md translate-x-56 opacity-0" id="bottom-right-slide">
-          <h2 class="font-bold mb-4 uppercase">title one here</h2>
-          <p class="md:text-base text-sm">description goes here. place holder at the moment just so i can see what thius would look like,will cange in  a bit</p>
+        
+        <div class="bg-[#ffffff30] backdrop-blur-md p-4 rounded-lg duration-700 max-w-md text-white">
+          <div class="inline-flex -ml-2 gap-2 items-center justify-center">
+            <img class="w-10" src="../assets/singlepage.png" alt="">
+            <h2 class="font-bold uppercase">Admin login</h2>
+          </div>
+          <p class="md:text-base text-sm mt-2">A single-page website consists of only one page with all your content being on it. Depending on what you want, this can be cheaper than a multi-page website.</p>
         </div>
       </div>
     </section>
   </section>
   
-  <section class="h-full bg-blue-500 duration-200 flex items-end justify-center thirdsection">
-    <swiper class="w-full h-1/2 max-w-3xl mb-20 opacity-0 duration-500 secondswiper"
+  <section class="h-full bg-blue-500 p-4 duration-200 flex items-end justify-center thirdsection">
+    <swiper class="w-full h-1/2 max-w-3xl mb-20 duration-500 secondswiper"
     :slides-per-view="1"
     :space-between="30"
     :pagination="{ clickable: true }" 
@@ -224,15 +202,37 @@ onMounted(() => {
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
-.secondsection, .thirdsection {
-  background-color: #111111;
+@import url('https://fonts.googleapis.com/css2?family=Protest+Riot&display=swap');
+
+nav {
+  box-shadow: 0 10px 30px 0 #111111;
 }
-.outside {
+.secondsection {
+  background: linear-gradient(to top, #000222, #000000);
+}
+nav, .title {
+  font-family: 'Protest Riot', cursive;
+  letter-spacing: 1px;
+}
+.thirdsection {
+  background-color: #000222;
+}
+.mainvideo {
+  mask-image: linear-gradient(to bottom, white, transparent);
+}
+.meimage {
+  background-image: url('../assets/me.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+/* .outside {
   background-image: url('../assets/rect.png');
   background-size: 70% 30%;
   background-repeat: no-repeat;
   background-position: top right;
-}
+  background-attachment: fixed;
+} */
 
 @media screen and (max-width: 768px) {
   .outside {
@@ -263,7 +263,7 @@ onMounted(() => {
 }
 
 .slides:not(.swiper-slide-active) {
-  @apply opacity-20;
+  @apply opacity-70;
 }
 
 :global(.swiper-pagination-bullet) {
@@ -280,7 +280,7 @@ onMounted(() => {
 .hamburger div {
   position: relative;
   width: 1.7em;
-  height: 3.5px;
+  height: 3px;
   border-radius: 3px;
   background-color: white;
   margin-top: 5px;
