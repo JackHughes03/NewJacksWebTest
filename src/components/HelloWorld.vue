@@ -28,7 +28,11 @@ function collapseslides() {
   const slides = document.querySelectorAll('.offercontainers');
 
   slides.forEach(slide => {
-    slide.style.marginBottom = '-20px';
+    if (slide.style.marginBottom === '-100px') {
+      slide.style.marginBottom = '8px';
+    } else {
+      slide.style.marginBottom = '-100px';
+    }
   });
 }
 </script>
@@ -134,7 +138,7 @@ function collapseslides() {
         </section>
       </section>
       
-      <section class="size-full text-white text-center flex flex-col items-center  overflow-x-clip px-1 mt-32 max-w-4xl">
+      <section class="size-full text-white text-center items-center  overflow-x-clip px-1 mt-32 max-w-4xl">
         <h2 class="text-3xl mb-12 border-b-[3px] px-2 border-white/70 inline-flex pb-2">Services I offer</h2>
         <button @click="collapseslides" class="mb-10 p-1 px-4 rounded-md cursor-pointer bg-white text-black">Collapse</button>
         
@@ -214,7 +218,7 @@ function collapseslides() {
   background-blend-mode: multiply;
 }
 .offercontainers {
-  @apply flex items-center border-2 shadow-xl shadow-[#111111] justify-center gap-10 text-left bg-[#1c1c1c] p-4 rounded-md max-w-2xl mb-2;
+  @apply flex items-center border-2 shadow-xl shadow-[#111111] justify-center gap-10 text-left bg-[#1c1c1c] p-4 rounded-md max-w-2xl mb-2 duration-500;
   .offerblocks {
     @apply bg-white w-[100px] md:w-[300px] md:h-[150px] rounded;
     background-position: center;
