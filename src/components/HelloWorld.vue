@@ -23,6 +23,14 @@ function expandnav() {
     nav.style.borderRadius = '0';
   }
 }
+
+function collapseslides() {
+  const slides = document.querySelectorAll('.offercontainers');
+
+  slides.forEach(slide => {
+    slide.style.marginBottom = '-20px';
+  });
+}
 </script>
 
 
@@ -126,8 +134,9 @@ function expandnav() {
         </section>
       </section>
       
-      <section class="size-full text-white text-center overflow-x-clip px-1 mt-32 max-w-4xl">
+      <section class="size-full text-white text-center flex flex-col items-center  overflow-x-clip px-1 mt-32 max-w-4xl">
         <h2 class="text-3xl mb-12 border-b-[3px] px-2 border-white/70 inline-flex pb-2">Services I offer</h2>
+        <button @click="collapseslides" class="mb-10 p-1 px-4 rounded-md cursor-pointer bg-white text-black">Collapse</button>
         
         <div class="offercontainers ml-auto rotate-3">
           <div class="pl-2">
@@ -178,10 +187,15 @@ function expandnav() {
       <section class="size-full text-white text-center mt-32 max-w-4xl pb-10">
         <h2 class="text-3xl mb-12 border-b-[3px] px-2 border-white/70 inline-flex pb-2">Contact me</h2>
         
-        <form class="flex flex-col gap-4 items-center justify-center">
-          <input class=" p-4 bg-[#1c1c1c] border-2 border-white/70 rounded-md" type="text" placeholder="Name">
-          <input class="p-4 bg-[#1c1c1c] border-2 border-white/70 rounded-md" type="text" placeholder="Email">
-          <textarea class="w-[40%] p-4 bg-[#1c1c1c] border-2 border-white/70 rounded-md" placeholder="Message"></textarea>
+        <form class="flex flex-col gap-4 items-center justify-center" action="https://api.staticforms.xyz/submit" method="post">
+          <input class=" p-4 bg-[#1c1c1c] border-2 border-white/70 rounded-md" type="text" placeholder="Name" name="name">
+          <input class="p-4 bg-[#1c1c1c] border-2 border-white/70 rounded-md" type="text" placeholder="Email" name="email">
+          <textarea class="w-[40%] p-4 bg-[#1c1c1c] border-2 border-white/70 rounded-md" placeholder="Message" name="message"></textarea>
+          <input type="text" name="honeypot" style="display:none">
+          <input type="hidden" name="accessKey" value="e749ad79-4651-42be-bd1c-a06af7678d6c">
+          <input type="hidden" name="subject" value="Contact us from - example.com" />
+          <input type="hidden" name="replyTo" value="@">
+          <input type="hidden" name="redirectTo" value="https://example.com/contact/success">
           <button class="px-4 bg-[#1c1c1c] border-2 border-white/70 rounded-md hover:bg-white hover:text-black duration-200">Send</button>
         </form>
       </section>
