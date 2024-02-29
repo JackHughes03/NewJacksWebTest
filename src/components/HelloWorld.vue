@@ -6,51 +6,7 @@ import SwiperCore, { Pagination, Navigation } from 'swiper/core';
 
 SwiperCore.use([Pagination, Navigation]);
 
-onscroll = (event) => {
-  const swiper = document.querySelector('.swipercontainer'),
-  title = document.querySelector('.title'),
-  headingtitle = document.querySelector('.title h1'),
-  secondsectionslides = document.querySelector('.secondsectionslides'),
-  headingp = document.querySelector('.title p'),
-  secondsection = document.querySelector('.secondsection'),
-  thirdsection = document.querySelector('.thirdsection'),
-  secondswiper = document.querySelector('.secondswiper'),
-  nav = document.querySelector('nav');
-  
-  if (window.scrollY > 100) {
-    swiper.style.transform = 'translateX(1000px)';
-    swiper.style.opacity = '0';
-  } else {
-    swiper.style.transform = 'translateX(0)';
-    swiper.style.opacity = '1';
-  }
-  
-  setTimeout(() => {
-    if (window.scrollY > 100) {
-      headingtitle.innerHTML = 'Services I offer';
-      headingp.innerHTML = 'From multi-page websites, to single page, I am trained in all!.';
-      
-      secondsectionslides.style.opacity = '1';
-    } else {
-      headingtitle.innerHTML = 'Hand-coded Websites';
-      headingp.innerHTML = 'Why settle for an average website when you have an exceptional idea? <br> Get a hand-coded website today!';
-      
-      secondsectionslides.style.opacity = '0';
-    }
-  }, 500);
-  
-  if (secondsection.getBoundingClientRect().top + 800 < window.innerHeight) {
-    title.style.transform = 'translateX(-1000px)';
-  } else {
-    title.style.transform = 'translateX(0px)';
-  }
-  if (thirdsection.getBoundingClientRect().top + 650 < window.innerHeight) {
-    title.style.transform = 'translateX(0px)';
-    
-    headingtitle.innerHTML = 'My Portfolio';
-    headingp.innerHTML = 'See some of my work!';
-  }
-};
+const showAuth = ref(false);
 
 function expandnav() {
   const nav = document.querySelector('nav');
@@ -67,142 +23,202 @@ function expandnav() {
     nav.style.borderRadius = '0';
   }
 }
-
-onMounted(() => {
-  addEventListener("scroll", (event) => {});
-});
 </script>
 
-<template>
-  <div class="bg-[#000000] w-full h-full absolute overflow-x-clip outside">
-    <section class="h-full">
-      <div class="w-full max-h-[650px] overflow-hidden absolute opacity-80 mainvideo">
-        <video autoplay loop muted src="../assets/nature2.mp4"></video>
-      </div>
-      
-      <nav class="flex items-center fixed h-14 top-4 w-[90%] max-w-3xl justify-end z-40 pr-6 py-4 rounded-2xl text-white bg-white/20 backdrop-blur-md left-1/2 duration-500 -translate-x-1/2">
-        <!-- <div class="size-[50px] absolute left-3 top-3 rounded-full border-b-2 meimage"></div> -->
-        <a class="font-bold uppercase absolute left-4" href="">JacksWeb</a>
-        
-        <ul class="hidden gap-4 md:flex text-sm">
-          <li class="duration-200 rounded-full cursor-pointer">Home</li>
-          <li class="duration-200 rounded-full cursor-pointer">Services</li>
-          <li class="duration-200 rounded-full cursor-pointer">Portfolio</li>
-          <li class="duration-200 rounded-full cursor-pointer">About</li>
-          <li class="duration-200 rounded-full cursor-pointer">Contact</li>
-        </ul>
-        
-        <input id="toggle" type="checkbox" class="hidden">
-        
-        <label @click="expandnav" for="toggle" class="hamburger cursor-pointer md:hidden">
-          <div class="top-bun"></div>
-          <div class="meat"></div>
-          <div class="bottom-bun"></div>
-        </label>
-      </nav>
-      
-      <header class="inline-flex mt-40 font-[roboto] items-center text-white">
-        <section class="md:w-[40%] w-[75%] md:max-w-lg fixed md:top-40 top-28 left-2 md:left-14 duration-500 z-30 p-6 rounded-xl title">
-          <h1 class="md:text-3xl text-xl font-bold uppercase">Hand-coded Websites</h1>
-          
-          <p class="mt-2 opacity-70 duration-200 md:text-base text-sm">Why settle for an average website when you have an exceptional idea? <br>
-            Get a hand-coded website today!
-          </p>
-          <hr class="mt-4 border-2 rounded-full">
-        </section>
-      </header>
-      
-      <section class="h-[35%] mt-[440px] md:p-6 p-2 text-white md:max-w-3xl mx-auto duration-1000 rounded-2xl swipercontainer">
-        <swiper class="size-full rounded-lg"
-        :slides-per-view="1.5"
-        :space-between="30"
-        :pagination="{ clickable: true }" 
-        :navigation="{ nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }"
-        :initial-slide="1"
-        :centered-slides="true">
-        <swiper-slide class="slides slide1">
-          <h2 class="font-bold uppercase">Hand-coded over Drag and drop</h2>
-          <p class="opacity-80">Hand-coded websites offer precise customisation, superior performance, scalability, efficient code, and greater control over security.</p>
-        </swiper-slide>
-        
-        <swiper-slide class="slides slide2">
-          <h2 class="font-bold uppercase">5 years of coding experience</h2>
-          <p class="opacity-80">With 5 years of coding experience, I can create a website that is tailored to your needs. Using best practices, I can quickly and efficiently code your website.</p>
-        </swiper-slide>
-        
-        <swiper-slide class="slides slide3">
-          <h2 class="font-bold uppercase">Extensive Experience and education</h2>
-          <p class="opacity-80">With a bachelors in cybersecurity and an internship under my belt, your website will be secure and as fast as ever.</p>
-        </swiper-slide>
-        
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
-      </swiper>
-    </section>
-  </section>
-  
-  <section class="flex mt-0 items-end secondsectionwrapper">
-    <section class="w-full h-full flex flex-col items-center justify-center duration-500 md:p-10 p-3 secondsection">
-      <div class="w-full duration-700 pt-20 text-white md:gap-10 gap-2 grid place-items-center grid-cols-1 md:grid-cols-2 max-w-4xl opacity-100 secondsectionslides">
-        <div class="bg-[#ffffff30] backdrop-blur-md md:p-8 p-4 rounded-lg duration-700 max-w-md">
-          <div class="inline-flex -ml-2 gap-2 items-center justify-center">
-            <img class="w-10" src="../assets/singlepage.png" alt="">
-            <h2 class="font-bold uppercase">Single page website</h2>
-          </div>
-          <p class="md:text-base text-sm mt-2">A single-page website consists of only one page with all your content being on it. Depending on what you want, this can be cheaper than a multi-page website.</p>
-        </div>
-        
-        <div class="bg-[#ffffff30] backdrop-blur-md md:p-8 p-4 rounded-lg duration-700 max-w-md">
-          <div class="inline-flex -ml-2 gap-2 items-center justify-center">
-            <img class="w-10" src="../assets/multipage.png" alt="">
-            <h2 class="font-bold uppercase">Multi-page website</h2>
-          </div>
-          <p class="md:text-base text-sm mt-2">A multi-page website consists of multiple pages to your site. Instead of your content remaining on one, it can be split up. This could be more expensive.</p>
-        </div>
 
-        <div class="bg-[#ffffff30] backdrop-blur-md p-4 rounded-lg duration-700 max-w-md text-white">
-          <div class="inline-flex -ml-2 gap-2 items-center justify-center">
-            <img class="w-10" src="../assets/singlepage.png" alt="">
-            <h2 class="font-bold uppercase">Admin login</h2>
+<template>
+  <div class="bg-[#1c1c1c] w-full h-full outside" id="app">
+    <section class="portfolio-section size-full flex items-center justify-center flex-col">
+      <section class="topbackground w-full flex items-center justify-center flex-col pb-10">
+        <nav class="flex items-center fixed h-14 top-4 w-[90%] max-w-3xl justify-end z-40 pr-6 py-4 rounded-2xl text-white bg-white/15 backdrop-blur-md left-1/2 duration-500 -translate-x-1/2">
+          
+          <a class="font-bold uppercase absolute left-4" href="">JacksWeb</a>
+          
+          <ul class="hidden gap-4 md:flex text-sm">
+            <li class="duration-200 rounded-full cursor-pointer">Home</li>
+            <li class="duration-200 rounded-full cursor-pointer">Portfolio</li>
+            <li class="duration-200 rounded-full cursor-pointer">Services</li>
+            <li class="duration-200 rounded-full cursor-pointer">Contact</li>
+          </ul>
+          
+          <input id="toggle" type="checkbox" class="hidden">
+          
+          <label @click="expandnav" for="toggle" class="hamburger cursor-pointer md:hidden">
+            <div class="top-bun"></div>
+            <div class="meat"></div>
+            <div class="bottom-bun"></div>
+          </label>
+        </nav>
+        
+        <h1 class="text-white text-4xl text-center pb-2 md:mt-32 mt-28 font-semibold px-4">Hand-coded websites</h1>
+        <p class="text-sm text-center max-w-2xl pb-2 border-b-[3px] w-3/4 md:w-unset border-white/70 text-white/70 mb-20 px-4">Why settle for an average website when you have an exceptional idea?</p>
+        
+        <section class="w-[90%] gap-8 text-xl border-2 bg-[#1c1c1c] rounded-md md:p-4 p-3 max-w-3xl flex items-end mx-auto">
+          <div class="md:w-[20%] hidden md:block scale-[1.45] mr-10 mb-4 -rotate-6">
+            <img class="overflow-hidden shadow-2xl shadow-white/40 border-2 border-white/70 rounded-md" src="../assets/me.png" alt="">
           </div>
-          <p class="md:text-base text-sm mt-2">A single-page website consists of only one page with all your content being on it. Depending on what you want, this can be cheaper than a multi-page website.</p>
+          
+          <div class="text-white md:w-[80%]">
+            <img class="h-[100px] rounded-md border-2 md:hidden absolute right-2 -mt-20 shadow-black" src="../assets/me.png" alt="">
+            
+            <p class="text-base md:text-xl">Hello👋, my name is <span class="text-orange-600 font-bold">Jack!</span></p>
+            <p class="text-base md:text-xl">I am a <span class="text-orange-600 font-bold">web developer</span>, <span class="text-orange-600 font-bold">cyber security</span> professional, and <span class="text-orange-600 font-bold">AI enthusiast!</span></p>
+            <ul class="font-light text-xs md:text-base mt-4 opacity-80 ml-4 list-disc">
+              <li>5 years experience in web developing & cybersecurity.</li>
+              <li>Bachelors of Science in cybersecurity including web developing.</li>
+              <li>Web development university teacher.</li>
+            </ul>
+          </div>
+        </section>
+      </section>
+      
+      <section class="md:w-[90%] md:mt-10 mt-10 mx-auto flex flex-col items-center justify-center text-white">
+        <h2 class="text-2xl mb-6 border-b-[3px] px-2 inline-flex pb-2 border-white/70">Examples of my work</h2>
+        
+        <section class="grid grid-cols-2 md:flex gap-3 md:flex-wrap md:items-center md:justify-center w-[90%] max-w-5xl mx-auto">
+          <a href="https://ahdrumservices.com" target="_blank">
+            <div class="bg-[#1c1c1c] flex flex-col gap-1 pl-4 justify-center md:w-[200px] py-2 md:py-6 hover:bg-[#222222] duration-200">
+              <img class="w-8 -ml-1" src="../assets/websiteicon.png" alt="">
+              <h2 class="text-lg">Drumming services</h2>
+              <p class="opacity-60 text-xs">Simple, single-page website developed efficiently with advanced technologies</p>
+            </div>
+          </a>
+          
+          <a href="https://ahdrumservices.com" target="_blank">
+            <div class="bg-[#1c1c1c] flex flex-col gap-1 pl-4 justify-center md:w-[200px] py-4 md:py-6 hover:bg-[#222222] duration-200">
+              <img class="w-8 -ml-1" src="../assets/websiteicon.png" alt="">
+              <h2 class="text-lg">Local football club</h2>
+              <p class="opacity-60 text-xs">Advanced, multi-page website with admin & editing functions.</p>
+            </div>
+          </a>
+          
+          <a href="https://jackhughes03.github.io/AI-Project/" target="_blank">
+            <div class="bg-[#1c1c1c] flex flex-col gap-1 pl-4 justify-center md:w-[200px] py-4 md:py-6 hover:bg-[#222222] duration-200">
+              <img class="w-8 -ml-1" src="../assets/websiteicon.png" alt="">
+              <h2 class="text-lg">AI website</h2>
+              <p class="opacity-60 text-xs">Simple, single page website with an advanced & modern design.</p>
+            </div>
+          </a>
+          
+          <a href="https://ahdrumservices.com" target="_blank">
+            <div class="bg-[#1c1c1c] flex flex-col gap-1 pl-4 justify-center md:w-[200px] py-4 md:py-6 hover:bg-[#222222] duration-200">
+              <img class="w-8 -ml-1" src="../assets/websiteicon.png" alt="">
+              <h2 class="text-lg">JacksWeb</h2>
+              <p class="opacity-60 text-xs">Advanced, single-page website using latest technologies and designs.</p>
+            </div>
+          </a>
+          
+          <a href="https://ahdrumservices.com" target="_blank">
+            <div class="bg-[#1c1c1c] flex flex-col gap-1 pl-4 justify-center md:w-[200px] py-4 md:py-6 hover:bg-[#222222] duration-200">
+              <img class="w-8 -ml-1" src="../assets/websiteicon.png" alt="">
+              <h2 class="text-lg">Website Example 1</h2>
+              <p class="opacity-60 text-xs">Description of this website example goes hereeeeee eeeeeeeeee</p>
+            </div>
+          </a>
+          
+          <a href="https://ahdrumservices.com" target="_blank">
+            <div class="bg-[#1c1c1c] flex flex-col gap-1 pl-4 justify-center md:w-[200px] py-4 md:py-6 hover:bg-[#222222] duration-200">
+              <img class="w-8 -ml-1" src="../assets/websiteicon.png" alt="">
+              <h2 class="text-lg">Website Example 1</h2>
+              <p class="opacity-60 text-xs">Description of this website example goes hereeeeeeeeee eeeeeee</p>
+            </div>
+          </a>
+        </section>
+      </section>
+      
+      <section class="size-full text-white text-center overflow-x-clip px-1 mt-32 max-w-4xl">
+        <h2 class="text-3xl mb-12 border-b-[3px] px-2 border-white/70 inline-flex pb-2">Services I offer</h2>
+        
+        <div class="offercontainers ml-auto rotate-3">
+          <div class="pl-2">
+            <h3>Single-page website</h3>
+            <p>This is a discriptive description that needs to be changed. It can be anything but this is a placeholder right now.</p>
+          </div>
+          
+          <img class="offerblocks" src="https://cdn.pixabay.com/photo/2018/05/04/20/01/website-3374825_1280.jpg" alt="">
         </div>
         
-        <div class="bg-[#ffffff30] backdrop-blur-md p-4 rounded-lg duration-700 max-w-md text-white">
-          <div class="inline-flex -ml-2 gap-2 items-center justify-center">
-            <img class="w-10" src="../assets/singlepage.png" alt="">
-            <h2 class="font-bold uppercase">Admin login</h2>
+        <div class="offercontainers -rotate-3">
+          <img class="offerblocks" src="https://cdn.pixabay.com/photo/2016/09/21/11/24/carousel-1684591_1280.png" alt="">
+          
+          <div>
+            <h3>Multi-page website</h3>
+            <p>This is a discriptive description that needs to be changed. It can be anything but this is a placeholder right now.</p>
           </div>
-          <p class="md:text-base text-sm mt-2">A single-page website consists of only one page with all your content being on it. Depending on what you want, this can be cheaper than a multi-page website.</p>
         </div>
-      </div>
+        
+        <div class="offercontainers ml-auto rotate-3">
+          <div class="pl-2">
+            <h3>Design</h3>
+            <p>This is a discriptive description that needs to be changed. It can be anything but this is a placeholder right now.</p>
+          </div>
+          
+          <img class="offerblocks" src="https://cdn.pixabay.com/photo/2018/08/18/13/26/interface-3614766_1280.png" alt="">
+        </div>
+        
+        <div class="offercontainers -rotate-3">
+          <img class="offerblocks" src="https://cdn.pixabay.com/photo/2018/04/29/20/45/laptop-3361063_1280.jpg" alt="">
+          
+          <div>
+            <h3>Admin</h3>
+            <p>This is a discriptive description that needs to be changed. It can be anything but this is a placeholder right now.</p>
+          </div>
+        </div>
+        
+        <div class="offercontainers ml-auto rotate-3">
+          <div class="pl-2">
+            <h3>Editing</h3>
+            <p>This is a discriptive description that needs to be changed. It can be anything but this is a placeholder right now.</p>
+          </div>
+          
+          <img class="offerblocks" src="https://cdn.pixabay.com/photo/2018/05/04/00/09/design-3372889_1280.jpg" alt="">
+        </div>
+      </section>
+      
+      <section class="size-full text-white text-center mt-32 max-w-4xl pb-10">
+        <h2 class="text-3xl mb-12 border-b-[3px] px-2 border-white/70 inline-flex pb-2">Contact me</h2>
+        
+        <form class="flex flex-col gap-4 items-center justify-center">
+          <input class=" p-4 bg-[#1c1c1c] border-2 border-white/70 rounded-md" type="text" placeholder="Name">
+          <input class="p-4 bg-[#1c1c1c] border-2 border-white/70 rounded-md" type="text" placeholder="Email">
+          <textarea class="w-[40%] p-4 bg-[#1c1c1c] border-2 border-white/70 rounded-md" placeholder="Message"></textarea>
+          <button class="px-4 bg-[#1c1c1c] border-2 border-white/70 rounded-md hover:bg-white hover:text-black duration-200">Send</button>
+        </form>
+      </section>
     </section>
-  </section>
-  
-  <section class="h-full bg-blue-500 p-4 duration-200 flex items-end justify-center thirdsection">
-    <swiper class="w-full h-1/2 max-w-3xl mb-20 duration-500 secondswiper"
-    :slides-per-view="1"
-    :space-between="30"
-    :pagination="{ clickable: true }" 
-    :navigation="{ nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }"
-    :centered-slides="true">
-    
-    <swiper-slide class="bg-white/25 rounded-md" id="portfolio-1"></swiper-slide>
-    <swiper-slide class="bg-white/25 rounded-md"></swiper-slide>
-    <swiper-slide class="bg-white/25 rounded-md"></swiper-slide>
-    <swiper-slide class="bg-white/25 rounded-md"></swiper-slide>
-    <swiper-slide class="bg-white/25 rounded-md"></swiper-slide>
-    
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
-  </swiper>
-</section>
-</div>
+  </div>
 </template>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Protest+Riot&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@300..700&display=swap');
+.topbackground {
+  background-image: url('https://cdn.pixabay.com/photo/2020/04/22/12/12/background-5077810_1280.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #11111170;
+  background-blend-mode: multiply;
+}
+.offercontainers {
+  @apply flex items-center border-2 shadow-xl shadow-[#111111] justify-center gap-10 text-left bg-[#1c1c1c] p-4 rounded-md max-w-2xl mb-2;
+  .offerblocks {
+    @apply bg-white w-[100px] md:w-[300px] md:h-[150px] rounded;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  
+  h3 {
+    @apply md:text-2xl font-semibold;
+  }
+  p {
+    @apply md:text-sm text-xs opacity-80 mt-2;
+  }
+}
+
+.portfolio-section {
+  background-color: #151515;
+}
 
 nav {
   box-shadow: 0 10px 30px 0 #111111;
@@ -210,11 +226,11 @@ nav {
 .secondsection {
   background: linear-gradient(to top, #000222, #000000);
 }
-nav, .title {
-  font-family: 'Protest Riot', cursive;
+nav, .title, section {
+  font-family: 'Signika Negative', sans-serif;
   letter-spacing: 1px;
 }
-.thirdsection {
+.fourthsection, .thirdsection {
   background-color: #000222;
 }
 .mainvideo {
@@ -256,7 +272,7 @@ nav, .title {
 }
 
 .slides {
-  @apply bg-cover md:h-auto h-[80%] md:p-4 p-3 gap-4 rounded-lg bg-[#ffffff] flex items-center justify-center flex-col text-center duration-200;
+  @apply bg-cover md:h-auto h-[100%] p-4 gap-4 rounded-lg bg-[#ffffff] flex items-center justify-center flex-col text-center duration-200;
   background-blend-mode: multiply;
   background-color: #00000090;
   transition: opacity 0.2s ease;
